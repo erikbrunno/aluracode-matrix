@@ -1,32 +1,7 @@
 import appConfig from '../config.json'
 import {Box, Button, Text, TextField, Image} from '@skynexui/components'
-
-function GlobalStyles() {
-    return (
-        <style global jsx>{`
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            list-style: none;
-        }
-        body {
-            font-family: 'Open Sans', sans-serif;
-        }
-        html, body, #__next {
-            min-height: 100vh;
-            display: flex;
-            flex: 1;
-        }
-        #__next {
-            flex: 1;
-        }
-        #__next > * {
-            flex: 1;
-        }
-        `}</style>
-    )
-}
+import React from 'react';
+import { useRouter } from 'next/router'
 
 function Titulo(props) {
     console.log(props)
@@ -46,11 +21,12 @@ function Titulo(props) {
   }
   
   export default function PaginaInicial() {
-    const username = 'erik-brunno';
   
+    const [username, setUsername] = React.useState('erikbrunno')
+    const roteamento = useRouter()
+
     return (
       <>
-        <GlobalStyles />
         <Box
           styleSheet={{
             display: 'flex',
@@ -85,6 +61,10 @@ function Titulo(props) {
             {/* Formulário */}
             <Box
               as="form"
+              onSubmit={function handleSubmit(event) {
+                event.preventDefault() //Previse o reload da pagina
+                roteamento.push("/chat") //Navega para pagina /chat
+              }}
               styleSheet={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -105,8 +85,18 @@ function Titulo(props) {
               >
                 {appConfig.name}
               </Text>
+              {/* <input type="text" 
+                value={username}
+                onChange={function handleChange(event) {
+                  setUsername(event.target.value)
+                }}
+              /> */}
   
               <TextField
+                value={username}
+                onChange={function handleChange(event) {
+                  setUsername(event.target.value)
+                }}
                 fullWidth
                 textFieldColors={{
                   neutral: {
@@ -129,7 +119,6 @@ function Titulo(props) {
                 }}
               />
             </Box>
-            {/* Formulário */}
   
             {/* Photo Area */}
             <Box
