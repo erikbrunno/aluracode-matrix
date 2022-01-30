@@ -63,7 +63,7 @@ function Titulo(props) {
               as="form"
               onSubmit={function handleSubmit(event) {
                 event.preventDefault() //Previse o reload da pagina
-                roteamento.push("/chat") //Navega para pagina /chat
+                roteamento.push(`chat?username=${username}`) //Navega para pagina /chat
               }}
               styleSheet={{
                 display: 'flex',
