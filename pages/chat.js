@@ -186,6 +186,7 @@ function Header() {
 
 function MessageList(props) {
     console.log(props);
+    console.log('Primeira alteraca')
     return (
         <Box
             tag="ul"
